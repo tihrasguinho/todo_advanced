@@ -13,19 +13,19 @@ class CreateTodoUseCaseImp implements CreateTodoUseCase {
   @override
   Future<Either<Exception, TodoEntity>> call(NewTodoEntity todo) async {
     if (!todo.isTitleOk) {
-      return Left(Exception('Your title must be six characters or high'));
+      return Left(Exception('Your title must be six characters or more'));
     }
 
     if (todo.title.containsEspecialChars) {
-      return Left(Exception('Your title must not be special characters'));
+      return Left(Exception('Your title must not contain special characters'));
     }
 
     if (!todo.isSubtitleOk) {
-      return Left(Exception('Your subtitle must be six characters or high'));
+      return Left(Exception('Your subtitle must be six characters or more'));
     }
 
     if (todo.subtitle.containsEspecialChars) {
-      return Left(Exception('Your subtitle must not be special characters'));
+      return Left(Exception('Your subtitle must not contain special characters'));
     }
 
     return await _createTodoRepository(todo);
